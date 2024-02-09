@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  ScrollView,
   StyleSheet,
   View
 } from 'react-native';
@@ -28,7 +25,6 @@ export default function TabOneScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [contentLoading, setIsContentLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [refreshing, setRefreshing] = useState(false);
   const [maxPostReached, setMaxPostReached] = useState(false)
 
   const fetchData = async () => {
@@ -79,21 +75,6 @@ export default function TabOneScreen() {
   useEffect(() => {
     fetchData();
   }, [page]);
-
-  const handleRefresh = () => {
-    setRefreshing(true);
-    setMaxPostReached(false);
-    setPage(1)
-    setPostData([])
-    fetchData();
-    setRefreshing(false);
-  };
-
-  const handleEndReached = () => {
-    if(!maxPostReached){
-      setPage(page + 1);
-    }
-  };
 
   return (
     <>
